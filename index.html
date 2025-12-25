@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Para Você ❤️</title>
+  <title>Para Uesleiana ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonte romântica -->
@@ -113,6 +113,9 @@
   </style>
 </head>
 <body>
+    <audio id="audio">
+  <source src="Iwanna.mp3.mp3" type="audio/mpeg">
+</audio>
 
   <div class="card">
     <div id="pergunta">
@@ -150,21 +153,24 @@
     </div>
   </div>
 
-  <script>
-    function verificar() {
-      const respostaCorreta = "lasanha"; // MUDE AQUI
-      const resposta = document.getElementById("resposta").value
-        .toLowerCase()
-        .trim();
+ <script>
+  function verificar() {
+    const respostaCorreta = "lasanha"; // MUDE AQUI
+    const resposta = document.getElementById("resposta").value
+      .toLowerCase()
+      .trim();
 
-      if (resposta === respostaCorreta) {
-        document.getElementById("pergunta").style.display = "none";
-        document.getElementById("mensagem").style.display = "block";
-      } else {
-        document.getElementById("erro").innerText = "Hmm… tenta de novo 💭";
-      }
+    if (resposta === respostaCorreta) {
+      document.getElementById("pergunta").style.display = "none";
+      document.getElementById("mensagem").style.display = "block";
+
+      const audio = document.getElementById("audio");
+      audio.play();
+    } else {
+      document.getElementById("erro").innerText = "Hmm… tenta de novo 💭";
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
