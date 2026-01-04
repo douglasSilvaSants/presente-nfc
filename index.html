@@ -134,6 +134,37 @@ button:hover {
   display: none;
   margin-top: 15px;
   animation: aparecer 1.5s ease;
+  
+  /* 🌙 Modo noturno automático */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: radial-gradient(circle at top, #1a0b12, #050204);
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 50px rgba(255, 0, 120, 0.25);
+  }
+}
+
+/* ☀️ Modo claro automático */
+@media (prefers-color-scheme: light) {
+  body {
+    background: radial-gradient(circle at top, #ffd6e5, #ffb3c7);
+    color: #3a0c1d;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.75);
+    color: #3a0c1d;
+    box-shadow: 0 0 40px rgba(255, 95, 138, 0.35);
+  }
+
+  button {
+    color: white;
+  }
+}
+
 }
 </style>
 
@@ -196,6 +227,9 @@ button:hover {
     } else {
       document.getElementById("erro").innerText = "Hmm… tenta de novo 💭";
     }
+    if (navigator.vibrate) {
+  navigator.vibrate([200, 100, 200]);
+}
   }
 </script>
 
