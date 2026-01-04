@@ -2,12 +2,15 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Leitura</title>
+  <title>Te Amo, Uesleiana!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='90' font-size='90'>❤️</text></svg>">
+
 
   <!-- Fontes editoriais -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
 
+  
   <style>
     * {
       box-sizing: border-box;
@@ -81,7 +84,95 @@
       font-size: 14px;
       color: #888;
       letter-spacing: 1px;
+       margin-top: px; 
     }
+
+    /* textarea */
+#mensagem {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  font-size: 15px;
+  font-family: inherit;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  outline: none;
+  resize: none;
+  transition: border 0.3s, background 0.3s;
+}
+
+#mensagem::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+#mensagem:focus {
+  border: 1px solid #ff5c8a;
+  background: rgba(255,255,255,0.08);
+}
+
+/* botão */
+.btn-enviar {
+  margin-top: 16px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #ff5c8a, #ff8fb3);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+}
+
+.btn-enviar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255,92,138,0.35);
+  opacity: 0.95;
+}
+
+.btn-enviar:active {
+  transform: scale(0.97);
+}
+#mensagem {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  font-size: 15px;
+  font-family: inherit;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  outline: none;
+  resize: none;
+  transition: border 0.3s, background 0.3s;
+
+  margin-top: 40px; /* aumenta esse valor até ficar na posição desejada */
+}
+.btn-voltar {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #ff5c8a, #ff8fb3);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+}
+
+.btn-voltar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255,92,138,0.35);
+  opacity: 0.95;
+}
+
+.btn-voltar:active {
+  transform: scale(0.97);
+}
+
   </style>
 </head>
 <body>
@@ -96,33 +187,56 @@
     </h1>
 
     <div class="texto">
-Não escrevi isso para impressionar.
-Escrevi porque guardar tudo em silêncio
-já não fazia sentido.
+Meu bem, Uesleiana, você foi a melhor pessoa que entrou na minha vida
+nos últimos 20 anos. Eu te agradeço bastante por isso.
+Hoje é dia 04/01/2026 ás 02:50 da manhã, e eu me encontro ansioso
+por esta fazendo esse site com o pensamento na mente de como será 
+sua reação. ontém tivemos momentos maravilhosos, você me deu bom dia,
+falou comigo que chegou em casa e quando chegou em casa,
+mesmo cansada, mesmo acordando 04:30 da manhã, veio passar o final de semana comigo. Você é incrivel, meu coração palpita quando te ver, 
+minhas energias voltam quando vejo seu olhar, eu me arrepio todo com seu sorriso, meus tipanos enviam sinais para o cerébro identificando que você esta perto,
+e dilata minha pupila e é ai que eu abaixo minha guarda total, me sinto leve.
+Eu amo te ver sorrindo, amo ficar ao seu lado, amo quando você me chama de meu bem, amo quando voce me da uma bronca por que sei que você se importa comigo.
+Acho que esta ao seu lado é igual a sensação de olhar para um horizonte em um fim de 
+tarde tranquilo, uma brisa ao seu rosto e balançando seu cabelo, vento leve e agradável e você respirar e sentir uma sensação de paz.
+Você é exatamente uma explosão de uma Supernova. Quando você passa da o que falar, chama atenção pela sua beleza negra, tem características únicas, e toma conta da cena 
+de qualquer pessoa que estiver ao seu lado, era assim mesmo no meu inicio de trabalho, estava um caos, mas quando você chegava com seu salto, com seu look,
+com sua essência, tudo ficava em câmera lenta, eu nao enxergava mais ninguém a não ser você. Você era e é única!
 
-Tem pessoas que passam pela nossa vida.
-E tem aquelas que ficam,
-mesmo quando não estão.
 
-Você ficou.
+Obrigado por tudo meu amor, tenha um ótimo dia hoje.
 
-<em>Ficou no detalhe.</em>
-Ficou no pensamento.
-Ficou no jeito como certas músicas
-não soam mais iguais.
-
-Se um dia você reler isso,
-em outro tempo,
-em outro momento,
-saiba que aqui
-existiu verdade.
     </div>
+    
 
     <div class="linha"></div>
 
     <div class="assinatura">
       Douglas
     </div>
+
+
+
+    <textarea id="mensagem" placeholder="Escreve aqui o que você quiser me dizer..."></textarea>
+
+<div style="display: flex; justify-content: center; gap: 16px; margin-top: 16px;">
+    <button class="btn-enviar" onclick="enviarWhats()">📩 Enviar</button>
+    <button class="btn-voltar" onclick="history.back()">⬅ Voltar</button>
+  
+</div>
+
+<script>
+function enviarWhats() {
+  const texto = document.getElementById("mensagem").value;
+  const numero = "5571987840506";
+  const url = `https://wa.me/${71987840506}?text=${encodeURIComponent(texto)}`;
+  window.open(url, "_blank");
+}
+
+
+</script>
+
+    
   </main>
 
 </body>
