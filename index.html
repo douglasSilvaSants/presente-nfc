@@ -192,7 +192,11 @@ button:hover {
     if (resposta === respostaCorreta) {
       document.getElementById("pergunta").style.display = "none";
       document.getElementById("mensagem").style.display = "block";
-
+      
+    // Vibração no celular (se suportado)
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200]);
+}
       const audio = document.getElementById("audio");
       audio.play();
     } else {
