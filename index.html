@@ -196,6 +196,7 @@ button:hover {
   </div>
 
  <script>
+
   function verificar() {
     const respostaCorreta = "lasanha"; // MUDE AQUI
     const resposta = document.getElementById("resposta").value
@@ -216,6 +217,31 @@ button:hover {
       document.getElementById("erro").innerText = "Hmm… tenta de novo 💭";
     }
   }
+  // Detecta iPhone / iOS
+const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// Áudio de feedback (iOS permite)
+const feedbackSound = new Audio("Vibration.mp3");
+
+// Função de feedback universal
+function feedback(element) {
+
+  // 🔔 Som
+  feedbackSound.currentTime = 0;
+  feedbackSound.play().catch(() => {});
+
+  // 🤖 Vibração (somente Android)
+  if (!isIOS && navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]);
+  }
+
+  // 🍎 Efeito visual (iPhone e Android)
+  element.classList.add("vibrate");
+  setTimeout(() => {
+    element.classList.remove("vibrate");
+  }, 400);
+}
+
 </script>
 
 <script>
