@@ -196,6 +196,39 @@ button:hover {
   color: #ff5f8a;
 }
 
+/* Transição de saída */
+.saindo {
+  animation: sair 0.8s ease forwards;
+}
+
+@keyframes sair {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.92) translateY(-20px);
+  }
+}
+
+/* Transição de entrada */
+.entrando {
+  animation: entrar 0.9s ease forwards;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: scale(1.05) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
 
 
 </style>
@@ -204,7 +237,7 @@ button:hover {
 <body>
   <canvas id="stars"></canvas>
     <audio id="audio">
-  <source src="Iwanna.mp3.mp3" type="audio/mpeg">
+  <source src="arte.mp3" type="audio/mpeg">
 </audio>
 
   <div class="card">
@@ -217,7 +250,7 @@ button:hover {
       </p>
 
       <div class="pergunta">
-        <p><strong>Qual a data do nosso aniversário de namoro?</strong></p>
+        <p><strong>Qual foi a comida que comiamos muito no inicio do relacionamento? </strong></p>
         <input type="text" id="resposta" placeholder="Digite com carinho…">
         <button onclick="verificar()">Continuar</button>
         <div class="erro" id="erro"></div>
@@ -232,44 +265,75 @@ button:hover {
         é porque meu coração escolheu o seu, e o seu escolheu o meu.
       </p>
       <p>
-        Que o nosso amor seja simples,<br>
-        intenso,<br>
-        e eterno em cada instante que a gente escolher viver.
+        Que a gente se escolha todos os dias,<br>
+        mesmo quando o mundo cansar.
       </p>
       <p>
         Eu vou me casar com você!
       </p>
        <p class="Volte-amanha">
-        Volte aqui amanha ás 08:00!
+        Volte aqui amanha às 08:00!
       </p>
       <p class="ler-texto">
-  <a href="texto.html">Ler texto.</a>
+  <a href="texto.html" onclick="irParaTexto(event)">Ler texto.</a>
 </p>
     </div>
   </div>
 
  <script>
 
-  function verificar() {
-    const respostaCorreta = "08/04/2025"; // MUDE AQUI
-    const resposta = document.getElementById("resposta").value
-      .toLowerCase()
-      .trim();
+  
 
-    if (resposta === respostaCorreta) {
-      document.getElementById("pergunta").style.display = "none";
-      document.getElementById("mensagem").style.display = "block";
-      
-    // Vibração no celular (se suportado)
-    if (navigator.vibrate) {
-      navigator.vibrate([300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300, 150, 300 ]);
+  function normalizar(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
-      const audio = document.getElementById("audio");
-      audio.play();
-    } else {
-      document.getElementById("erro").innerText = "Hmm… tenta de novo 💭";
+
+let tentativas = 0;
+const MAX_TENTATIVAS_DICA = 3;
+
+function verificar() {
+  const respostaCorreta = "frango empanado";
+  const resposta = document.getElementById("resposta").value
+    .toLowerCase()
+    .trim();
+
+  if (resposta === respostaCorreta) {
+  const pergunta = document.getElementById("pergunta");
+  const mensagem = document.getElementById("mensagem");
+  const audio = document.getElementById("audio");
+
+  setTimeout(() => {
+    pergunta.style.display = "none";
+    mensagem.style.display = "block";
+
+    localStorage.setItem("respostaCerta", "true");
+
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200]);
     }
+
+    playComFadeIn(audio, 3000);
+  }, 250);
+
+} else {
+  tentativas++;
+
+  const erro = document.getElementById("erro");
+
+  if (tentativas >= MAX_TENTATIVAS_DICA) {
+    erro.innerText = "Dica 💡: Crocante...";
+  } else {
+    erro.innerText = "Tenta de novo com calma. My Bien💛";
   }
+}
+
+}
+
+
   // Detecta iPhone / iOS
 const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -294,6 +358,57 @@ function feedback(element) {
     element.classList.remove("vibrate");
   }, 400);
 }
+
+function playComFadeIn(audio, duracao = 3000) {
+  audio.volume = 0;
+  audio.currentTime = 0;
+
+  audio.play().catch(() => {});
+
+  const passos = 30;
+  const intervalo = duracao / passos;
+  let volumeAtual = 0;
+
+  const fade = setInterval(() => {
+    volumeAtual += 1 / passos;
+    audio.volume = volumeAtual;
+
+    if (volumeAtual >= 1) {
+      audio.volume = 1;
+      clearInterval(fade);
+    }
+  }, intervalo);
+}
+
+function fadeOutAudio(audio, duracao = 3000) {
+  const passos = 30;
+  const intervalo = duracao / passos;
+  let volumeAtual = audio.volume;
+
+  const fade = setInterval(() => {
+    volumeAtual -= volumeAtual / passos;
+    audio.volume = Math.max(volumeAtual, 0);
+
+    if (audio.volume <= 0.01) {
+      audio.volume = 0;
+      audio.pause();
+      clearInterval(fade);
+    }
+  }, intervalo);
+}
+
+const audio = document.getElementById("audio");
+
+audio.addEventListener("timeupdate", () => {
+  const tempoRestante = audio.duration - audio.currentTime;
+
+  if (tempoRestante <= 3 && !audio.fadingOut) {
+    audio.fadingOut = true;
+    fadeOutAudio(audio, 3000);
+  }
+});
+
+
 
 </script>
 
